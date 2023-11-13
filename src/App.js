@@ -15,6 +15,7 @@ import {
   ModalContent,
   ModalHeader,
   VStack,
+  Kbd,
 } from "@chakra-ui/react";
 
 import "./App.css";
@@ -45,8 +46,6 @@ function App() {
     BACKGROUND9,
   ];
   const [background, setBackground] = useState(BACKGROUND1);
-
-  console.log(background);
 
   useEffect(() => {
     contextRef.current = canvasRef.current.getContext("2d");
@@ -143,13 +142,19 @@ function App() {
     link.click();
   }
 
+  function handleKeyDown(e) {
+    if (e.code === "Space") {
+      downloadImage();
+    }
+  }
+
   const changeBackground = (item) => (event) => {
     setBackground(item);
     onClose();
   };
 
   return (
-    <Box className="App" justifyItems="center">
+    <Box className="App" justifyItems="center" onKeyDown={handleKeyDown} tabIndex={0}>
       <video
         id="background"
         autoPlay
@@ -171,8 +176,10 @@ function App() {
         <Button onClick={onOpen} colorScheme="blue">
           Choose Background
         </Button>
-        <Button onClick={downloadImage} colorScheme="green">
-          Take Photo
+        <Button onClick={downloadImage} colorScheme="red">
+          <div>
+            Take Photo {" "}<Kbd color="black">space</Kbd>
+          </div>
         </Button>
       </HStack>
       <Modal
