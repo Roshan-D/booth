@@ -64,7 +64,7 @@ function App() {
 
     selfieSegmentation.setOptions({
       modelSelection: 1,
-      selfieMode: true,
+      selfieMode: false,
     });
 
     selfieSegmentation.onResults(onResults);
